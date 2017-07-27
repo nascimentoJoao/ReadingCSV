@@ -15,6 +15,7 @@ import com.opencsv.CSVReader;
 
 import org.w3c.dom.Text;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -45,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         String[] line;
-
         Calendar dateObject = Calendar.getInstance();
         SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
         String dataAtual = formatDate.format(dateObject.getTime());
@@ -54,10 +54,12 @@ public class MainActivity extends AppCompatActivity {
         try {
 
             while ((line = reader.readNext()) != null){
-                Log.e("Conteudo",
-                        line[0]
-                          + " "
-                            + line[1]);
+                switch(line[0]){
+                    case "Disciplina":
+                        String disciplina = line[1];
+                        TextView showDisciplina = (TextView) findViewById(R.id.showDisciplina);
+                        showDisciplina.setText(disciplina);
+                }
             }
 
         } catch (IOException e) {
