@@ -7,9 +7,37 @@
     android:layout_height="match_parent"
     tools:context="com.example.readingcsv.MainActivity">
 
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/content_csv">
-    </TableLayout>
+    <TextView
+        android:id="@+id/titleDisciplina"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_disciplina"
+        android:textSize="25sp"/>
+
+    <TextView
+        android:id="@+id/titleData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_data"
+        android:textSize="25sp"
+        android:layout_below="@+id/titleDisciplina"
+        />
+
+    <TextView
+        android:id="@+id/showDisciplina"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:text="disciplina"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/titleDisciplina" />
+    <TextView
+        android:id="@+id/showData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:text="data"
+        android:layout_alignBaseline="@+id/titleData"
+        android:layout_alignBottom="@+id/titleData"
+        android:layout_toEndOf="@+id/titleData" />
 </RelativeLayout>
