@@ -40,4 +40,12 @@
         android:layout_alignBaseline="@+id/titleData"
         android:layout_alignBottom="@+id/titleData"
         android:layout_toEndOf="@+id/titleData" />
+
+    <ListView
+        android:id="@+id/lista_alunos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:layout_below="@+id/titleData" />
+
 </RelativeLayout>
