@@ -1,39 +1,23 @@
 package com.example.readingcsv;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TableLayout;
 import android.widget.TextView;
-
 import com.opencsv.CSVReader;
-
-import org.w3c.dom.Text;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Collections;
-import java.util.List;
-import java.util.StringTokenizer;
+
 
 public class MainActivity extends AppCompatActivity {
-
+    public final static String MEU_ALUNO = "com.example.readingcsv.ALUNO";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,44 +36,51 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         String[] line;
-        Calendar dateObject = Calendar.getInstance();
-        SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
-        String dataAtual = formatDate.format(dateObject.getTime());
-        TextView showData = (TextView) findViewById(R.id.showData);
-        showData.setText(dataAtual);
 
+        DataAtual data = new DataAtual();
+
+        final TextView showData = (TextView) findViewById(R.id.showData);
+
+        showData.setText(" "+data.getDataAtual());
+        showData.setTextSize(20);
         try {
 
             while ((line = reader.readNext()) != null){
                 switch(line[0]){
                     case "Disciplina":
-
                         String disciplina = line[1];
                         TextView showDisciplina = (TextView) findViewById(R.id.showDisciplina);
-                        showDisciplina.setText(disciplina);
+                        showDisciplina.setText(" "+disciplina);
+                        showDisciplina.setTextSize(20);
                         break;
-
                     case "Aluno":
-
-                        final List<String> meusAlunos = new ArrayList<String>();
-
+                        final ArrayList<String> meusAlunos = new ArrayList<String>();
                         while((line = reader.readNext()) != null) {
-                            meusAlunos.add(line[0]);
+                                meusAlunos.add(line[0]);
                         }
-                        ArrayAdapter<String> alunos = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, meusAlunos);
-                        ListView listaAlunos = (ListView) findViewById(R.id.lista_alunos);
+                        Collections.sort(meusAlunos);
+                        Button startChamada = (Button) findViewById(R.id.start_chamada);
+                        startChamada.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent showAluno = new Intent(MainActivity.this, AlunoActivity.class);
+                                showAluno.putStringArrayListExtra(MEU_ALUNO, meusAlunos);
+                                startActivity(showAluno);
+                            }
+                        });
+                        final ArrayAdapter<String> alunos = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, meusAlunos);
+                        final ListView listaAlunos = (ListView) findViewById(R.id.lista_alunos);
                         listaAlunos.setAdapter(alunos);
                         listaAlunos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                int pos = position;
-                                if (pos == meusAlunos.indexOf(meusAlunos)){
-                                    Intent intent = new Intent("android.intent.action.show_aluno.class");
-                                    startActivity(intent);
-                                }
+                                Intent intent = new Intent(MainActivity.this, AlunoActivity.class);
+                                Integer indexOfAluno = Integer.valueOf(position);
+                                String passaAluno = meusAlunos.get(indexOfAluno);
+                                intent.putExtra(MEU_ALUNO, passaAluno);
+                                startActivity(intent);
                             }
                         });
-
                         break;
                 }
             }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ReadingCSV</string>
-    <string name="title_disciplina">Disciplina: </string>
-    <string name="title_data">Data: </string>
+    <string name="app_name">App Chamada</string>
+    <string name="title_disciplina">Disciplina:</string>
+    <string name="title_data">Data:</string>
 </resources>
