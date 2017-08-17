@@ -1,7 +1,5 @@
 package com.example.readingcsv;
 
-import android.provider.ContactsContract;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 

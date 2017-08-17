@@ -12,7 +12,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/title_disciplina"
-        android:textSize="25sp"/>
+        android:textSize="25sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/titleData"
@@ -28,15 +30,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="25sp"
-        android:text="disciplina"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/titleDisciplina" />
+        android:text=""
+        android:layout_toRightOf="@+id/titleDisciplina" />
     <TextView
         android:id="@+id/showData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="25sp"
-        android:text="data"
+        android:text=""
         android:layout_alignBaseline="@+id/titleData"
         android:layout_alignBottom="@+id/titleData"
         android:layout_toEndOf="@+id/titleData" />
@@ -44,7 +45,7 @@
     <ListView
         android:id="@+id/lista_alunos"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
 
         android:layout_below="@+id/titleData" />
 
@@ -52,10 +53,9 @@
         android:id="@+id/start_chamada"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Inicia Chamada"
-        android:layout_above="@+id/lista_alunos"
-        android:layout_alignParentEnd="true"
+        android:text="@string/start_chamada"
         android:textSize="15sp"
-        />
+        android:layout_above="@+id/lista_alunos"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
